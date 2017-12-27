@@ -1,5 +1,8 @@
 package android.chris.com.retrofittuto;
 
+import android.chris.com.retrofittuto.Model.BreakfastMenu;
+import android.chris.com.retrofittuto.Model.Comment;
+import android.chris.com.retrofittuto.Model.Food;
 import android.chris.com.retrofittuto.Model.Users;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +24,15 @@ import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,14 +48,61 @@ public class MainActivity extends AppCompatActivity {
         Users userPost = new Users();
         userPost.setId(100);
 
-        Log.i("GSON--- ",gson.toJson(userPost));
+       // Log.i("GSON--- ",gson.toJson(userPost));
+
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+
+        OkHttpClient client = new OkHttpClient
+                .Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
+
+     /*   Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .build();*/
+
+     /*   Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();*/
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(SimpleXmlConverterFactory.create())
                 .build();
 
         Api api = retrofit.create(Api.class);
 
+        api.getMenu().enqueue(new Callback<BreakfastMenu>() {
+            @Override
+            public void onResponse(Call<BreakfastMenu> call, Response<BreakfastMenu> response) {
+                BreakfastMenu breakfastMenu = response.body();
+                for(Food food: breakfastMenu.getFoodList()){
+                    Log.d("RetrofitExample", food.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BreakfastMenu> call, Throwable t) {
+
+            }
+        });
+
+       /* api.getCommentsByPostId(100).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Comment comment = response.body();
+                Log.d("RetrofitGSON-Converter--",comment.getBody());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });*/
+/*
         String userName = "myusername";
         String password = "mypassword";
         String userAndPassword = userName + ":" + password;
@@ -69,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
-        });
+        }); */
 
        /* String contentType = "application/json";
         String userAgent = "RetrofitExample";

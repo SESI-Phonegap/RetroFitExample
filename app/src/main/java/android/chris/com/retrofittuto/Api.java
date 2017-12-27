@@ -1,6 +1,8 @@
 package android.chris.com.retrofittuto;
 
 
+import android.chris.com.retrofittuto.Model.BreakfastMenu;
+
 import java.util.List;
 import java.util.Map;
 
@@ -97,4 +99,7 @@ public interface Api {
 
     @GET("https://httpbin.org/basic-auth/myusername/mypassword")
     Call<ResponseBody> auth(@Header("Authorization") String authorization);
+
+    @GET("https://www.w3schools.com/xml/simple.xml")
+    Call<BreakfastMenu> getMenu();
 }
