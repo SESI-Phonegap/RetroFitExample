@@ -1,38 +1,14 @@
-package android.chris.com.retrofittuto;
+package android.chris.com.retrofittuto.view.activity;
 
-import android.chris.com.retrofittuto.Model.BreakfastMenu;
-import android.chris.com.retrofittuto.Model.Comment;
-import android.chris.com.retrofittuto.Model.Food;
-import android.chris.com.retrofittuto.Model.Users;
+import android.chris.com.retrofittuto.R;
+import android.chris.com.retrofittuto.data.model.Users;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();*/
-
+/*
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(SimpleXmlConverterFactory.create())
-                .build();
-
+                .build();*/
+/*
         Api api = retrofit.create(Api.class);
 
         api.getMenu().enqueue(new Callback<BreakfastMenu>() {
@@ -88,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<BreakfastMenu> call, Throwable t) {
 
             }
-        });
+        });*/
 
        /* api.getCommentsByPostId(100).enqueue(new Callback<ResponseBody>() {
             @Override

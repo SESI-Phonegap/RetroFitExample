@@ -1,4 +1,4 @@
-package android.chris.com.retrofittuto.Model;
+package android.chris.com.retrofittuto.data.model;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
