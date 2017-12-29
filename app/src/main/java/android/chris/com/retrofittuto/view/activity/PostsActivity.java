@@ -12,6 +12,7 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,7 @@ public class PostsActivity extends AppCompatActivity implements PostsPresenter.V
         progressBar = findViewById(R.id.progressBar);
         postsPresenter = new PostsPresenter(new PostsInteractor(new TestExampleClient()));
         postsPresenter.setView(this);
+        setupRecyclerView();
     }
 
     @Override
@@ -81,6 +83,7 @@ public class PostsActivity extends AppCompatActivity implements PostsPresenter.V
     @Override
     public void renderPosts(List<Posts> posts) {
         PostsAdapter adapter = (PostsAdapter) rv_posts.getAdapter();
+        Toast.makeText(this,"Numero de registros: "+posts.size(),Toast.LENGTH_LONG).show();
         adapter.setPosts(posts);
         adapter.notifyDataSetChanged();
     }
@@ -92,6 +95,13 @@ public class PostsActivity extends AppCompatActivity implements PostsPresenter.V
                 postsPresenter.onGetAllPostByGet();
                 break;
         }
+    }
+
+    private void setupRecyclerView(){
+        PostsAdapter adapter = new PostsAdapter();
+        rv_posts.setLayoutManager(new LinearLayoutManager(this));
+        rv_posts.setAdapter(adapter);
+        rv_posts.setHasFixedSize(true);
     }
 
     @Override

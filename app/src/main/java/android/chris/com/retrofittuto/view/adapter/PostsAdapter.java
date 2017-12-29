@@ -22,7 +22,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     }
     @Override
     public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PostViewHolder(parent);
+        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_row_posts, parent, false);
+        return new PostViewHolder(itemView);
     }
 
     @Override
@@ -51,8 +52,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
 
         View view;
         Posts post;
-        public PostViewHolder(ViewGroup parent){
-            super(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_row_posts, parent, false));
+        public PostViewHolder(View itemView){
+            super(itemView);
             tvId = itemView.findViewById(R.id.tvid);
             tvUserId = itemView.findViewById(R.id.tvuserId);
             tvTitle = itemView.findViewById(R.id.tvtitle);
