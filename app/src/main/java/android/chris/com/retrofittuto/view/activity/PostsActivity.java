@@ -27,7 +27,6 @@ public class PostsActivity extends AppCompatActivity implements PostsPresenter.V
     private Button btn_get;
     private RecyclerView rv_posts;
     private ProgressBar progressBar;
-    private ConstraintLayout constraintLayout;
 
     private PostsPresenter postsPresenter;
 
@@ -38,7 +37,6 @@ public class PostsActivity extends AppCompatActivity implements PostsPresenter.V
         btn_get =  findViewById(R.id.btn_get);
         btn_get.setOnClickListener(this);
         rv_posts = findViewById(R.id.rv_post);
-        constraintLayout = findViewById(R.id.contraintLayout);
         progressBar = findViewById(R.id.progressBar);
         postsPresenter = new PostsPresenter(new PostsInteractor(new TestExampleClient()));
         postsPresenter.setView(this);
@@ -66,7 +64,7 @@ public class PostsActivity extends AppCompatActivity implements PostsPresenter.V
 
     @Override
     public void showPostNotFoundMessage() {
-        rv_posts.setVisibility(View.GONE);
+        rv_posts.setVisibility(View.INVISIBLE);
         Toast.makeText(this, "No se encontraron datos",Toast.LENGTH_LONG).show();
     }
 
