@@ -30,8 +30,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     public void onBindViewHolder(PostViewHolder holder, int position) {
         Posts post = posts.get(position);
         holder.post = post;
-        holder.tvId.setText(post.getId());
-        holder.tvUserId.setText(post.getUserId());
+        holder.tvId.setText(String.valueOf(post.getId()));
+        holder.tvUserId.setText(String.valueOf(post.getUserId()));
         holder.tvTitle.setText(post.getTitle());
         holder.tvBody.setText(post.getBody());
     }
